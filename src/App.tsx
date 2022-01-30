@@ -70,6 +70,11 @@ const Container = styled.div`
   margin: 0 auto;
   max-width: 480px;
   padding: 30px 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 function App() {

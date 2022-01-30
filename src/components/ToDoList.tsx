@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { Categories, categoryState, toDoSelector } from "../atom";
@@ -7,9 +8,18 @@ import ToDo from "./ToDo";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  border: 1px solid white;
+  border-radius: 15px;
+  padding: 30px;
+  width: 100%;
   & hr {
     width: 100%;
+  }
+  h1 {
+    font-size: 48px;
+    font-weight: 500;
   }
 `;
 
@@ -21,16 +31,18 @@ const Header = styled.header`
 
 function ToDoList() {
   const toDos = useRecoilValue(toDoSelector);
+  const [title, setTitle] = useState("TO DO");
   const [category, setCategory] = useRecoilState(categoryState);
   const onInput = (e: React.FormEvent<HTMLSelectElement>) => {
     const {
       currentTarget: { value },
     } = e;
     setCategory(value as any);
+    setTitle(value.replace("_", " "));
   };
   return (
     <Wrapper>
-      <h1>To Dos</h1>
+      <h1>{title}</h1>
       <hr />
       <Header>
         <form>
